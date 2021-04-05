@@ -1,0 +1,36 @@
+$primary-color: #71ff7f;
+
+@mixin show_border($clr: black, $on: true) {
+  @if $on == true {
+    border: 2px solid $clr;
+  }
+}
+
+body,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: $primary-color;
+}
+
+.header {
+  @include show_border(red);
+}
+.nav {
+  @include show_border(green);
+}
+
+.ul {
+  list-style-type: none;
+  @include show_border(blue);
+  display: flex;
+  flex-direction: row;
+}
+
+.li {
+  @include show_border(black);
+}
