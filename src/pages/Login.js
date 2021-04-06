@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import "./Login.scss";
-// import
+import checklist from "./images/checklist.png";
 
 class Login extends React.Component {
   constructor(props) {
@@ -32,7 +32,37 @@ class Login extends React.Component {
           </nav>
         </header>
         <div class="main-body">
-          <img src="images/checklist.png" alt="checklist" />
+          <img src={checklist} alt="checklist" className="checklist-img" />
+          <section className="sign-in-section">
+            <div>
+              <h1 class="catch">Start doing what you need to do.</h1>
+              <h3>A simple web app that lets you add and complete tasks.</h3>
+            </div>
+
+            <div>
+              <form onSubmit={this.handleSubmit} className="sign-in-info">
+                <label>
+                  <input
+                    type="text"
+                    value={this.state.username}
+                    placeholder="Username"
+                    onChange={this.handleChange}
+                    className="input-style"
+                  />
+                </label>
+                <label>
+                  <input
+                    type="text"
+                    value={this.state.password}
+                    placeholder="Password"
+                    onChange={this.handleChange}
+                    className="input-style"
+                  />
+                </label>
+                <input type="submit" value="Submit" className="submit-style" />
+              </form>
+            </div>
+          </section>
         </div>
       </>
     );

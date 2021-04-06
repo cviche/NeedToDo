@@ -1,7 +1,7 @@
 $primary-color: #71ff7f;
 $secondary-color: #2044c5;
 @import url("https://www.fonts.com/font/jiyu-kobo/yu-gothic?QueryFontType=Web&src=GoogleWebFonts");
-@mixin show_border($clr: black, $on: true) {
+@mixin show_border($clr: black, $on: false) {
   @if $on == true {
     border: 2px solid $clr;
   }
@@ -66,4 +66,49 @@ button {
 
 .main-body {
   @include show_border(grey);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.checklist-img {
+  width: 10rem;
+  height: 15rem;
+  @include show_border(orange);
+}
+
+.sign-in-section {
+  @include show_border(purple);
+  width: 25rem;
+  height: 25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.sign-in-info {
+  height: 10rem;
+  @include show_border(purple);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.input-style {
+  border: none;
+  border-radius: 0.2rem;
+  outline: none;
+  width: 15rem;
+  height: 1.5rem;
+}
+
+.submit-style {
+}
+
+.catch {
+  font-size: 2.5rem;
+  text-align: center;
 }
