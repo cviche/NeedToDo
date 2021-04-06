@@ -35,8 +35,10 @@ class Login extends React.Component {
           <img src={checklist} alt="checklist" className="checklist-img" />
           <section className="sign-in-section">
             <div>
-              <h1 class="catch">Start doing what you need to do.</h1>
-              <h3>A simple web app that lets you add and complete tasks.</h3>
+              <h1 class="catch">Start doing what you</h1>
+              <h3 class="subcatch">
+                A simple web app that lets you add and complete tasks.
+              </h3>
             </div>
 
             <div>
@@ -59,7 +61,11 @@ class Login extends React.Component {
                     className="input-style"
                   />
                 </label>
-                <input type="submit" value="Submit" className="submit-style" />
+                <input
+                  type="submit"
+                  value="Become productive"
+                  className="submit-style"
+                />
               </form>
             </div>
           </section>

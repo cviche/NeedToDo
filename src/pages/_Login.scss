@@ -1,5 +1,6 @@
 $primary-color: #71ff7f;
 $secondary-color: #2044c5;
+$primary-font: "Yu Gothic";
 @import url("https://www.fonts.com/font/jiyu-kobo/yu-gothic?QueryFontType=Web&src=GoogleWebFonts");
 @mixin show_border($clr: black, $on: false) {
   @if $on == true {
@@ -17,6 +18,7 @@ button {
 
 body {
   background-color: $primary-color;
+  font-family: $primary-font;
 }
 
 .header {
@@ -106,9 +108,24 @@ button {
 }
 
 .submit-style {
+  background-color: #454545;
+  color: $primary-color;
+  width: 8rem;
+  height: 2rem;
+  border-radius: 0.2rem;
 }
 
 .catch {
   font-size: 2.5rem;
   text-align: center;
+}
+
+.subcatch {
+  font-weight: 300;
+  font-size: 1rem;
+}
+
+.catch::after {
+  content: " need to do.";
+  color: $secondary-color;
 }
