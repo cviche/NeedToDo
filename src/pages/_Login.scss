@@ -1,5 +1,6 @@
 $primary-color: #71ff7f;
-
+$secondary-color: #2044c5;
+@import url("https://www.fonts.com/font/jiyu-kobo/yu-gothic?QueryFontType=Web&src=GoogleWebFonts");
 @mixin show_border($clr: black, $on: true) {
   @if $on == true {
     border: 2px solid $clr;
@@ -8,7 +9,8 @@ $primary-color: #71ff7f;
 
 body,
 ul,
-li {
+li,
+button {
   margin: 0;
   padding: 0;
 }
@@ -19,18 +21,49 @@ body {
 
 .header {
   @include show_border(red);
+  width: 100%;
+  height: auto;
 }
 .nav {
   @include show_border(green);
 }
 
 .ul {
+  height: 5rem;
   list-style-type: none;
   @include show_border(blue);
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  // align-items: center;
+  font-size: 3rem;
 }
 
 .li {
-  @include show_border(black);
+  @include show_border(white);
+}
+
+button {
+  background-color: transparent;
+  border: none;
+
+  outline: none;
+}
+
+.logo-text {
+  margin-left: 1.5rem;
+  font-size: 3rem;
+  font-family: "Yu Gothic";
+  color: $secondary-color;
+  font-weight: bold;
+  // margin-top: 0.5rem;
+}
+
+.sign-in {
+  font-size: 1rem;
+  margin-right: 1.5rem;
+}
+
+.main-body {
+  @include show_border(grey);
 }
