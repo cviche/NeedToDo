@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import "./Landing.scss";
 import checklist from "../images/checklist.png";
+import { Link } from "react-router-dom";
 
 class Landing extends React.Component {
   constructor(props) {
@@ -24,9 +25,9 @@ class Landing extends React.Component {
                 </button>
               </li>
               <li className="li">
-                <button onClick={this.handleSignIn} className="sign-in">
+                <Link to="/login" className="sign-in">
                   Sign In
-                </button>
+                </Link>
               </li>
             </ul>
           </nav>

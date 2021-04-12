@@ -5,4 +5,9 @@ class Login extends React.Component {
     super(props);
     this.state = {};
   }
+
+  render() {
+    return <div>Hello world123</div>;
+  }
 }
+export default Login;
