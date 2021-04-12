@@ -8,6 +8,7 @@ function App() {
       <Switch>
         <Route path="/" exact component={Landing} />
         <Route path="/home" render={() => <div>Home Page not made yet.</div>} />
+        <Route path="/login" exact component={Landing} />
       </Switch>
     </BrowserRouter>
   );
