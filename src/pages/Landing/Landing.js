@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import "./Landing.scss";
-import checklist from "./images/checklist.png";
+import checklist from "../images/checklist.png";
 
 class Landing extends React.Component {
   constructor(props) {
