@@ -54,7 +54,7 @@ class Landing extends React.Component {
                 </label>
                 <label>
                   <input
-                    type="text"
+                    type="password"
                     value={this.state.password}
                     placeholder="Password"
                     onChange={this.handleChange}
