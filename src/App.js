@@ -1,11 +1,15 @@
 import "./App.css";
-import Login from "./pages/Login";
+import Landing from "./pages/Login";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 function App() {
   return (
-    <div>
-      <Login />
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/" exact component={Landing} />
+        <Route path="/home" render={() => <div>Home Page not made yet.</div>} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
