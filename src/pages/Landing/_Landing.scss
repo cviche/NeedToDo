@@ -64,6 +64,11 @@ button {
 .sign-in {
   font-size: 1rem;
   margin-right: 1.5rem;
+  font-weight: bold;
+}
+
+.sign-in:hover {
+  color: $secondary-color;
 }
 
 .main-body {
