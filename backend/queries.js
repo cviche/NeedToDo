@@ -1,6 +1,10 @@
 const { Pool, Client } = require("pg");
-const connectionString =
-  "postgres://ipdxkxkn:lDUe4SwhWc2L3JnkEvJoSVrzCBRPVLOa@kashin.db.elephantsql.com:5432/ipdxkxkn";
+require("dotenv").config();
+const username = process.env.DB_USERNAME;
+const password = process.env.DB_PASSWORD;
+const host = process.env.DB_HOST;
+const db_name = process.env.DB_NAME;
+const connectionString = `postgres://${username}:${password}@${host}/${db_name}`;
 const pool = new Pool({
   connectionString,
 });
