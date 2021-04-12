@@ -1,5 +1,5 @@
 import "./App.css";
-import Landing from "./pages/Login";
+import Landing from "./pages/Landing";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 function App() {
