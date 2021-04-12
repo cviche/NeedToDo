@@ -1,4 +1,5 @@
-import React from "react";
+import React, { Fragment } from "react";
+import "./Login.scss";
 
 class Login extends React.Component {
   constructor(props) {
@@ -7,7 +8,11 @@ class Login extends React.Component {
   }
 
   render() {
-    return <div>Hello world123</div>;
+    return (
+      <Fragment>
+        <section className="title"></section>
+      </Fragment>
+    );
   }
 }
 export default Login;
