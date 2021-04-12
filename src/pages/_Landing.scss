@@ -1,0 +1,131 @@
+$primary-color: #71ff7f;
+$secondary-color: #2044c5;
+$primary-font: "Yu Gothic";
+@import url("https://www.fonts.com/font/jiyu-kobo/yu-gothic?QueryFontType=Web&src=GoogleWebFonts");
+@mixin show_border($clr: black, $on: false) {
+  @if $on == true {
+    border: 2px solid $clr;
+  }
+}
+
+body,
+ul,
+li,
+button {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: $primary-color;
+  font-family: $primary-font;
+}
+
+.header {
+  @include show_border(red);
+  width: 100%;
+  height: auto;
+}
+.nav {
+  @include show_border(green);
+}
+
+.ul {
+  height: 5rem;
+  list-style-type: none;
+  @include show_border(blue);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  // align-items: center;
+  font-size: 3rem;
+}
+
+.li {
+  @include show_border(white);
+}
+
+button {
+  background-color: transparent;
+  border: none;
+
+  outline: none;
+}
+
+.logo-text {
+  margin-left: 1.5rem;
+  font-size: 3rem;
+  font-family: "Yu Gothic";
+  color: $secondary-color;
+  font-weight: bold;
+  // margin-top: 0.5rem;
+}
+
+.sign-in {
+  font-size: 1rem;
+  margin-right: 1.5rem;
+}
+
+.main-body {
+  @include show_border(grey);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.checklist-img {
+  width: 10rem;
+  height: 15rem;
+  @include show_border(orange);
+}
+
+.sign-in-section {
+  @include show_border(purple);
+  width: 25rem;
+  height: 25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.sign-in-info {
+  height: 10rem;
+  @include show_border(purple);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.input-style {
+  border: none;
+  border-radius: 0.2rem;
+  outline: none;
+  width: 15rem;
+  height: 1.5rem;
+}
+
+.submit-style {
+  background-color: #454545;
+  color: $primary-color;
+  width: 8rem;
+  height: 2rem;
+  border-radius: 0.2rem;
+}
+
+.catch {
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+.subcatch {
+  font-weight: 300;
+  font-size: 1rem;
+}
+
+.catch::after {
+  content: " need to do.";
+  color: $secondary-color;
+}
