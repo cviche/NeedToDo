@@ -1,2 +1,2 @@
-let host_name;
-export default host_name = "http://localhost/4000";
+let backend_host;
+export default backend_host = "http://localhost:4000";

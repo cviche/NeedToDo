@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import "./Login.scss";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import host_name from "../host";
+import backend_host from "../host";
 
 class Login extends React.Component {
   constructor(props) {
@@ -16,9 +16,9 @@ class Login extends React.Component {
   handleLogin = (event) => {
     event.preventDefault();
 
-    console.log(host_name);
+    console.log(backend_host);
     axios
-      .get(host_name)
+      .get(backend_host)
       .then((response) => {
         console.log(response);
       })
