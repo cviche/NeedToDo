@@ -11,8 +11,8 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.get("/authenticate", (req, res) => {
-  res.send("You are authenticated!");
+app.get("/login", (req, res) => {
+  res.send("You are logged in!");
 });
 
 app.listen(port, () => {

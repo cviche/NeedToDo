@@ -18,7 +18,7 @@ class Login extends React.Component {
 
     console.log(backend_host);
     axios
-      .get(backend_host)
+      .get(`${backend_host}/login`)
       .then((response) => {
         console.log(response);
       })
