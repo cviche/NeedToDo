@@ -5,8 +5,14 @@ import { Link } from "react-router-dom";
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      username: "",
+    };
   }
+
+  handleLogin = () => {};
+
+  // handleChange;
 
   render() {
     return (
@@ -21,6 +27,8 @@ class Login extends React.Component {
               name="username"
               className="input-style"
               placeholder="Username"
+              value={this.state.username}
+              onChange={this.handleChange}
             />
             <input
               type="password"
