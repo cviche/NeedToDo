@@ -17,8 +17,9 @@ class Login extends React.Component {
     event.preventDefault();
 
     console.log(backend_host);
+    console.log(this.state);
     axios
-      .get(`${backend_host}/login`)
+      .get(`${backend_host}/login`, this.state)
       .then((response) => {
         console.log(response);
       })
