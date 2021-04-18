@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import backend_host from "../host";
 
+axios.defaults.withCredentials = true;
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -19,7 +20,11 @@ class Login extends React.Component {
     console.log(backend_host);
     console.log(this.state);
     axios
-      .get(`${backend_host}/login`, this.state)
+      .post(`${backend_host}/login`, this.state, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
       .then((response) => {
         console.log(response);
       })
