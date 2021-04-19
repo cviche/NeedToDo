@@ -32,12 +32,12 @@ class Landing extends React.Component {
             </ul>
           </nav>
         </header>
-        <div class="main-body">
+        <div className="main-body">
           <img src={checklist} alt="checklist" className="checklist-img" />
           <section className="sign-in-section">
             <div>
-              <h1 class="catch">Start doing what you</h1>
-              <h3 class="subcatch">
+              <h1 className="catch">Start doing what you</h1>
+              <h3 className="subcatch">
                 A simple web app that lets you add and complete tasks.
               </h3>
             </div>

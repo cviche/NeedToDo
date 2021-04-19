@@ -1,0 +1,9 @@
+$primary-color: #71ff7f;
+$secondary-color: #2044c5;
+$primary-font: "Yu Gothic";
+@import url("https://www.fonts.com/font/jiyu-kobo/yu-gothic?QueryFontType=Web&src=GoogleWebFonts");
+@mixin show_border($clr: black, $on: false) {
+  @if $on == true {
+    border: 2px solid $clr;
+  }
+}

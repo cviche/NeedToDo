@@ -1,0 +1,52 @@
+@import "../variables";
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @include show_border(red, false);
+}
+
+.title-text {
+  font-size: 3rem;
+  color: $secondary-color;
+  text-decoration: none;
+  font-weight: bold;
+  //   border: 2px solid green;
+}
+
+.title-text:hover {
+  color: $secondary-color + #005;
+}
+
+.form-container {
+  @include show_border(green, false);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 12rem;
+}
+
+.input-style {
+  width: 20rem;
+  height: 2.5rem;
+  font-size: 1.5rem;
+}
+
+.login-button {
+  width: 10rem;
+  height: 3rem;
+  background-color: #454545;
+  font-weight: bold;
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+  outline: none;
+  border: none;
+}
+
+.login-button:hover {
+  background-color: #383838;
+  cursor: pointer;
+}
