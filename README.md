@@ -73,11 +73,21 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ### `Database`
 
-- PostgreSQL Cloud Provider: **https://www.elephantsql.com/**
-- Connecting to ElephantSQL: **https://www.elephantsql.com/docs/pgadmin.html**
+- PostgreSQL Cloud Provider:
+  - **https://www.elephantsql.com/**
+- Connecting to ElephantSQL:
+  - **https://www.elephantsql.com/docs/pgadmin.html**
 - Making Database Connection Private:
-  - **https://www.npmjs.com/package/dotenv** | **https://www.youtube.com/watch?v=HRBNeERE5PU**
+  - **https://www.npmjs.com/package/dotenv**
+  - **https://www.youtube.com/watch?v=HRBNeERE5PU**
 
 ## `Frontend`
 
-- Storing data in local storage: https://blog.logrocket.com/localstorage-javascript-complete-guide/
+- Storing data in local storage:
+  - https://blog.logrocket.com/localstorage-javascript-complete-guide/
+  - https://developer.chrome.com/docs/devtools/storage/localstorage/
+
+## `Backend`
+
+- Creating a JWT Token:
+  - https://www.youtube.com/watch?v=7nafaH9SddU
