@@ -76,7 +76,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 - PostgreSQL Cloud Provider: **https://www.elephantsql.com/**
 - Connecting to ElephantSQL: **https://www.elephantsql.com/docs/pgadmin.html**
 - Making Database Connection Private:
-- - **https://www.npmjs.com/package/dotenv** & **https://www.youtube.com/watch?v=HRBNeERE5PU**
+  - **https://www.npmjs.com/package/dotenv** | **https://www.youtube.com/watch?v=HRBNeERE5PU**
 
 ## `Frontend`
 
