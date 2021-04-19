@@ -32,7 +32,7 @@ exports.register = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
-  console.log("SERVER: Trying to login a user");
+  console.log("API: Trying to login a user");
   try {
     // Accessing the password given to us
     const user_pw = req.body.password;
@@ -62,8 +62,8 @@ exports.login = async (req, res) => {
     }
 
     // The password that was provided was incorrect.
-    console.log("Incorrect password");
-    res.status(500).send("Failed to login");
+    console.log("API: Incorrect password\n");
+    res.status(403).send("Incorrect password");
   } catch (error) {
     console.log(error);
     res

@@ -27,6 +27,10 @@ class Login extends React.Component {
       })
       .then((response) => {
         console.log(response);
+        const token = response.data.token;
+        console.log(token);
+        localStorage.setItem("token", token);
+        console.log("Frontend: Successfully stored token in local storage.");
       })
       .catch((error) => {
         console.log(error);
