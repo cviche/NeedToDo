@@ -73,7 +73,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ### `Database`
 
-I used PostgreSQL for the Database language and used the cloud provider: **https://www.elephantsql.com/**
-Connecting to elephantsql: **https://www.elephantsql.com/docs/pgadmin.html**
-To make my database connection private, I used dotenv: **https://www.npmjs.com/package/dotenv**
-and learned how to use it using this video: **https://www.youtube.com/watch?v=HRBNeERE5PU**
+- PostgreSQL Cloud Provider: **https://www.elephantsql.com/**
+- Connecting to ElephantSQL: **https://www.elephantsql.com/docs/pgadmin.html**
+- Making Database Connection Private: **https://www.npmjs.com/package/dotenv** & **https://www.youtube.com/watch?v=HRBNeERE5PU**
+
+## `Frontend`
+
+- Storing data in local storage: https://blog.logrocket.com/localstorage-javascript-complete-guide/
