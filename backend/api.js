@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const queries = require("./queries");
+const jwt = require("jsonwebtoken");
 
 exports.register = async (req, res) => {
   try {
@@ -51,10 +52,12 @@ exports.login = async (req, res) => {
     //Comparing the hashed password to the password in the database
     if (await bcrypt.compare(user_pw, db_pw)) {
       console.log("Correct password");
-      res.status(200).send("You are logged in!");
-      /*
-        Give the user a json web token
-      */
+
+      // Give the user a JSON Web token so they stay logged in
+      const token = jwt.sign({ user: user }, "secret"); // NOTE: Change secret to environment variable
+      console.log(token);
+      res.status(200).json({ token });
+
       return;
     }
 
@@ -68,3 +71,19 @@ exports.login = async (req, res) => {
       .send("An error has occured. Incorrect username or password entered.");
   }
 };
+
+const verifyToken = (req, res, next) => {
+  // Making sure we have a token
+  const bearerHeader = req.headers["authorization"];
+  if (typeof bearerHeader !== "undefined") {
+    const bearer = bearerHeader.split(" ");
+    const bearerToken = bearer[1];
+    req.token = bearerToken;
+    next();
+  } else {
+    // Does not have token, so access forbidden
+    res.sendStatus(403);
+  }
+};
+
+exports.authenticate = (req, res) => {};
