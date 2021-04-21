@@ -1,1 +1,50 @@
 @import "../variables";
+
+.home-nav {
+  background-color: $primary-color;
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  //   @include show_border(red, true);
+}
+
+.home-ul {
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  height: 4rem;
+  justify-content: space-around;
+  align-items: center;
+  //   margin: 0.2rem;
+  width: 20rem;
+  //   flex-flow: ;
+  //
+  //   background-color: black;
+  @include show_border(red, false);
+}
+
+.sign-out-button {
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.sign-out-button:hover {
+  color: $secondary-color;
+}
+
+.add-icon {
+  font-size: 2.5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.add-icon:hover {
+  color: $secondary-color;
+}
+
+.notes-section {
+  text-align: center;
+}

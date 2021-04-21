@@ -5,6 +5,7 @@ import axios from "axios";
 import backend_host from "../host";
 
 axios.defaults.withCredentials = true;
+// document.body.style.backgroundColor = "green";
 class Login extends React.Component {
   constructor(props) {
     super(props);
