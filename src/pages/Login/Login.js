@@ -3,9 +3,10 @@ import "./Login.scss";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import backend_host from "../host";
-import { login } from "../api_calls";
+import { login, authenticate } from "../api_calls";
 
 axios.defaults.withCredentials = true;
+// let history = useHistory();
 // document.body.style.backgroundColor = "green";
 class Login extends React.Component {
   constructor(props) {
@@ -15,6 +16,18 @@ class Login extends React.Component {
       password: "",
     };
   }
+
+  // Redirects to login page if the user is authenticated.
+  componentDidMount = async () => {
+    console.log("Hello world.");
+    const auth_successful = await authenticate(backend_host);
+    console.log(auth_successful);
+    if (auth_successful === true) {
+      // thishistory.pushState("/home");
+      this.props.history.push("/home");
+      console.log("We are pushing the user to the home page");
+    } else console.log("Bad");
+  };
 
   // Sends a POST request to the server to login a user.
   handleLogin = async (event) => {

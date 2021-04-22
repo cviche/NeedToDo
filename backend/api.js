@@ -67,18 +67,25 @@ exports.login = async (req, res) => {
   }
 };
 
-const verifyToken = (req, res, next) => {
-  // Making sure we have a token
-  const bearerHeader = req.headers["authorization"];
-  if (typeof bearerHeader !== "undefined") {
-    const bearer = bearerHeader.split(" ");
-    const bearerToken = bearer[1];
-    req.token = bearerToken;
-    next();
-  } else {
-    // Does not have token, so access forbidden
-    res.sendStatus(403);
-  }
+exports.authenticate = (req, res) => {
+  const data = verifyToken(req, res, null);
+  console.log(data);
+  return data;
 };
+const verifyToken = (req, res, next) => {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+  if (token == null) return res.sendStatus(401);
 
-exports.authenticate = (req, res) => {};
+  jwt.verify(token, "secret", (err, user) => {
+    console.log(err);
+    console.log("above is the error");
+    if (err) return res.sendStatus(403);
+    // req.user = user;
+    // next();
+    console.log(
+      "We have successfully authenticated the user. This token is valid"
+    );
+    return res.sendStatus(200);
+  });
+};
