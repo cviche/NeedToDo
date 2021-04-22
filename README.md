@@ -71,7 +71,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ## References
 
-### `Database`
+## `Database`
 
 - PostgreSQL Cloud Provider:
   - **https://www.elephantsql.com/**
@@ -97,8 +97,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
   - **https://www.youtube.com/watch?v=7nafaH9SddU**
   - **https://www.youtube.com/watch?v=mbsmsi7l3r4**
-
-- - **https://www.codegrepper.com/code-examples/javascript/send+bearer+token+in+header+axios+react+js**
 
 ## `Miscellaneous`
 
