@@ -38,6 +38,7 @@ class Login extends React.Component {
       if (login_successful) {
         console.log("LOGIN: You have successfully logged in.");
         localStorage.setItem("token", token);
+        this.props.history.push("/home");
         return;
       }
 
