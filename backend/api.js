@@ -40,35 +40,30 @@ exports.login = async (req, res) => {
 
     // Getting password from database
     const db_pw = await queries.db_pw(user, user_pw);
-    console.log(user_pw, db_pw);
 
     // Checking to make sure we recevied a password from the database
     if (db_pw === null) {
-      console.log("There was no password for the provided username");
       res.status(500).send("There was no password for the provided username");
       return;
     }
 
     //Comparing the hashed password to the password in the database
     if (await bcrypt.compare(user_pw, db_pw)) {
-      console.log("Correct password");
-
       // Give the user a JSON Web token so they stay logged in
       const token = jwt.sign({ user: user }, "secret"); // NOTE: Change secret to environment variable
       console.log(token);
       res.status(200).json({ token });
-
       return;
     }
 
     // The password that was provided was incorrect.
-    console.log("API: Incorrect password\n");
     res.status(403).send("Incorrect password");
   } catch (error) {
     console.log(error);
     res
       .status(403)
       .send("An error has occured. Incorrect username or password entered.");
+    return;
   }
 };
 

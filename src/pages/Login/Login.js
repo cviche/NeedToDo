@@ -3,6 +3,7 @@ import "./Login.scss";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import backend_host from "../host";
+import { login } from "../api_calls";
 
 axios.defaults.withCredentials = true;
 // document.body.style.backgroundColor = "green";
@@ -15,27 +16,25 @@ class Login extends React.Component {
     };
   }
 
-  handleLogin = (event) => {
+  // Sends a POST request to the server to login a user.
+  handleLogin = async (event) => {
     event.preventDefault();
-
-    console.log(backend_host);
-    console.log(this.state);
-    axios
-      .post(`${backend_host}/login`, this.state, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        console.log(response);
-        const token = response.data.token;
-        console.log(token);
+    try {
+      const curr_state = this.state;
+      const login_successful = await login(backend_host, curr_state);
+      const token = login_successful;
+      console.log(token);
+      if (login_successful) {
+        console.log("LOGIN: You have successfully logged in.");
         localStorage.setItem("token", token);
-        console.log("Frontend: Successfully stored token in local storage.");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        return;
+      }
+
+      console.log("An error has occured");
+      return;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // handleChange;
