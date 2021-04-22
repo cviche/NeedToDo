@@ -84,17 +84,23 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ## `Frontend`
 
 - Storing data in local storage:
+
   - **https://blog.logrocket.com/localstorage-javascript-complete-guide/**
   - **https://developer.chrome.com/docs/devtools/storage/localstorage/**
+
+- Sending a token to a server using axios
+  - **https://www.codegrepper.com/code-examples/javascript/send+bearer+token+in+header+axios+react+js**
 
 ## `Backend`
 
 - Creating a JWT Token:
+
   - **https://www.youtube.com/watch?v=7nafaH9SddU**
   - **https://www.youtube.com/watch?v=mbsmsi7l3r4**
+
+- - **https://www.codegrepper.com/code-examples/javascript/send+bearer+token+in+header+axios+react+js**
 
 ## `Miscellaneous`
 
 - Importing functions from another file
   - **https://www.youtube.com/watch?v=Jqn_wjkSZwo**
--
