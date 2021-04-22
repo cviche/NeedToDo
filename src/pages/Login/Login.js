@@ -17,16 +17,14 @@ class Login extends React.Component {
     };
   }
 
-  // Redirects to login page if the user is authenticated.
+  // Redirects to home page if the user is authenticated.
   componentDidMount = async () => {
-    console.log("Hello world.");
     const auth_successful = await authenticate(backend_host);
-    console.log(auth_successful);
     if (auth_successful === true) {
-      // thishistory.pushState("/home");
-      this.props.history.push("/home");
       console.log("We are pushing the user to the home page");
-    } else console.log("Bad");
+      this.props.history.push("/home");
+    }
+    return;
   };
 
   // Sends a POST request to the server to login a user.

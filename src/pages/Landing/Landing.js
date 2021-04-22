@@ -2,12 +2,24 @@ import React, { Fragment } from "react";
 import "./Landing.scss";
 import checklist from "../images/checklist.png";
 import { Link } from "react-router-dom";
+import backend_host from "../host";
+import { login, authenticate } from "../api_calls";
 
 class Landing extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
+
+  // Redirects to home page if the user is authenticated.
+  componentDidMount = async () => {
+    const auth_successful = await authenticate(backend_host);
+    if (auth_successful === true) {
+      console.log("We are pushing the user to the home page");
+      this.props.history.push("/home");
+    }
+    return;
+  };
 
   handleSignIn = () => {
     console.log("Hello world");
