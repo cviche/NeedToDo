@@ -11,13 +11,14 @@ class Landing extends React.Component {
     this.state = {
       username: "",
       password: "",
-      incorrect_pw: true,
+      taken_username: false,
     };
   }
 
   // Redirects to home page if the user is authenticated.
   componentDidMount = async () => {
     const auth_successful = await authenticate(backend_host);
+    console.log(this.state.taken_username, "Is this");
     if (auth_successful === true) {
       console.log("We are pushing the user to the home page");
       this.props.history.push("/home");
@@ -46,12 +47,13 @@ class Landing extends React.Component {
         this.props.history.push("/home");
         return;
       }
-
+      this.setState({ taken_username: true });
       console.log("An error has occured");
       return;
     } catch (error) {
       console.log(error);
-      this.setState({ incorrect_pw: true });
+      this.setState({ taken_username: true });
+      console.log(this.state.taken_username);
     }
     // try {
     //   const curr_state = this.state;
@@ -101,6 +103,18 @@ class Landing extends React.Component {
 
             <div>
               <form onSubmit={this.handleRegister} className="sign-in-info">
+                {this.state.taken_username ? (
+                  <h4
+                    style={{
+                      color: "red",
+                      margin: "10px",
+                      fontWeight: "bolder",
+                    }}
+                  >
+                    That username is taken. Try another
+                  </h4>
+                ) : null}
+
                 <label>
                   <input
                     type="text"
@@ -111,6 +125,7 @@ class Landing extends React.Component {
                     className="input-style"
                   />
                 </label>
+
                 <label>
                   <input
                     type="password"

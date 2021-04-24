@@ -89,10 +89,12 @@ button {
 }
 
 .sign-in-info {
-  height: 10rem;
-  @include show_border(purple);
+  height: 15rem;
+  // @include show_border(purple, true);
   display: flex;
+  flex: 1 0 auto;
   flex-direction: column;
+  flex-basis: auto;
   justify-content: space-around;
   align-items: center;
 }
