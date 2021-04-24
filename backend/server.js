@@ -27,8 +27,11 @@ app.get("/", (req, res) => {
 // User login route
 app.post("/login", api.login);
 
-// Root directory call
+// Authenticate route
 app.get("/authenticate", api.authenticate);
+
+// Register route
+app.post("/register", api.register);
 
 // Server listenting to address
 app.listen(port, () => {

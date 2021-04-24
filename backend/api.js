@@ -5,21 +5,28 @@ const jwt = require("jsonwebtoken");
 exports.register = async (req, res) => {
   try {
     // Extracting username and password.
+    console.log("in register api");
+    console.log(req.body);
     const user = req.body.username;
     const pw = req.body.password;
+    console.log("hi");
 
     // Generating a hashed password to store into the database for security.
     const salt = await bcrypt.genSalt();
-    const hashed_pw = await bcrypt.hash(user_pw, salt);
+    const hashed_pw = await bcrypt.hash(pw, salt);
 
     // Storing user information into the database.
-    const insert_successful = queries.register_user(user, hashed_pw);
+    console.log("Before insert succ");
+
+    const insert_successful = await queries.register_user(user, hashed_pw);
+    console.log("After insert succ");
 
     // Giving the user a JSON Web Token to make sure they stay logged in
     // once they finish creating their account.
     if (insert_successful) {
       console.log("Successful: The user has been created!");
-      return res.status(200).send("You have successfully created an account!");
+      return exports.login(req, res);
+      // return res.status(200).send("You have successfully created an account!");
     } else {
       console.log("Unsuccessful: The user has not been created!");
       return res
@@ -27,7 +34,10 @@ exports.register = async (req, res) => {
         .send("An error has occured while trying to register you.");
     }
   } catch {
-    res.status(500).send("An error has occured while trying to register you.");
+    console.log("error");
+    return res
+      .status(500)
+      .send("An error has occured while trying to register you.");
   }
 };
 
@@ -43,8 +53,9 @@ exports.login = async (req, res) => {
 
     // Checking to make sure we recevied a password from the database
     if (db_pw === null) {
-      res.status(500).send("There was no password for the provided username");
-      return;
+      return res
+        .status(500)
+        .send("There was no password for the provided username");
     }
 
     //Comparing the hashed password to the password in the database
@@ -52,18 +63,16 @@ exports.login = async (req, res) => {
       // Give the user a JSON Web token so they stay logged in
       const token = jwt.sign({ user: user }, "secret"); // NOTE: Change secret to environment variable
       console.log(token);
-      res.status(200).json({ token });
-      return;
+      return res.status(200).json({ token });
     }
 
     // The password that was provided was incorrect.
     res.status(403).send("Incorrect password");
   } catch (error) {
     console.log(error);
-    res
+    return res
       .status(403)
       .send("An error has occured. Incorrect username or password entered.");
-    return;
   }
 };
 

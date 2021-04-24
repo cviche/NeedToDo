@@ -11,13 +11,25 @@ const pool = new Pool({
 
 // Registers a user into the database.
 exports.register_user = async (username, password) => {
-  // Check to see if the username is already in the database
-  const find_username = `SELECT username FROM userinfo`;
-  const values = [username, password];
-  const user_found = await pool.query(find_username, values[0]);
-  if (!user_found) {
-    return true;
-  } else {
+  try {
+    // Check to see if the username is already in the database
+    console.log(username, password);
+    const find_username = `SELECT username FROM userinfo WHERE username= '${username}'`;
+    const user_found = await pool.query(find_username);
+    console.log(user_found.rows);
+    if (user_found.rows.length !== 0) {
+      console.log("We have found a user, return false");
+      return false;
+    } else {
+      console.log("in inserting");
+      const insert_user = `INSERT INTO userinfo VALUES('${username}', '${password}')`;
+      const user_inserted = await pool.query(insert_user);
+      console.log(user_inserted);
+      return true;
+    }
+  } catch (error) {
+    console.log("Something was wrong with the query");
+    console.log(error);
     return false;
   }
 };
