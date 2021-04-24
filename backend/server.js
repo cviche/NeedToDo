@@ -27,6 +27,9 @@ app.get("/", (req, res) => {
 // User login route
 app.post("/login", api.login);
 
+// Root directory call
+app.get("/authenticate", api.authenticate);
+
 // Server listenting to address
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}\n`);

@@ -40,50 +40,52 @@ exports.login = async (req, res) => {
 
     // Getting password from database
     const db_pw = await queries.db_pw(user, user_pw);
-    console.log(user_pw, db_pw);
 
     // Checking to make sure we recevied a password from the database
     if (db_pw === null) {
-      console.log("There was no password for the provided username");
       res.status(500).send("There was no password for the provided username");
       return;
     }
 
     //Comparing the hashed password to the password in the database
     if (await bcrypt.compare(user_pw, db_pw)) {
-      console.log("Correct password");
-
       // Give the user a JSON Web token so they stay logged in
       const token = jwt.sign({ user: user }, "secret"); // NOTE: Change secret to environment variable
       console.log(token);
       res.status(200).json({ token });
-
       return;
     }
 
     // The password that was provided was incorrect.
-    console.log("API: Incorrect password\n");
     res.status(403).send("Incorrect password");
   } catch (error) {
     console.log(error);
     res
       .status(403)
       .send("An error has occured. Incorrect username or password entered.");
+    return;
   }
 };
 
+exports.authenticate = (req, res) => {
+  const data = verifyToken(req, res, null);
+  console.log(data);
+  return data;
+};
 const verifyToken = (req, res, next) => {
-  // Making sure we have a token
-  const bearerHeader = req.headers["authorization"];
-  if (typeof bearerHeader !== "undefined") {
-    const bearer = bearerHeader.split(" ");
-    const bearerToken = bearer[1];
-    req.token = bearerToken;
-    next();
-  } else {
-    // Does not have token, so access forbidden
-    res.sendStatus(403);
-  }
-};
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+  if (token == null) return res.sendStatus(401);
 
-exports.authenticate = (req, res) => {};
+  jwt.verify(token, "secret", (err, user) => {
+    console.log(err);
+    console.log("above is the error");
+    if (err) return res.sendStatus(403);
+    // req.user = user;
+    // next();
+    console.log(
+      "We have successfully authenticated the user. This token is valid"
+    );
+    return res.sendStatus(200);
+  });
+};

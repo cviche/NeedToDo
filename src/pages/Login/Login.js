@@ -3,8 +3,11 @@ import "./Login.scss";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import backend_host from "../host";
+import { login, authenticate } from "../api_calls";
 
 axios.defaults.withCredentials = true;
+// let history = useHistory();
+// document.body.style.backgroundColor = "green";
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -14,27 +17,36 @@ class Login extends React.Component {
     };
   }
 
-  handleLogin = (event) => {
-    event.preventDefault();
+  // Redirects to home page if the user is authenticated.
+  componentDidMount = async () => {
+    const auth_successful = await authenticate(backend_host);
+    if (auth_successful === true) {
+      console.log("We are pushing the user to the home page");
+      this.props.history.push("/home");
+    }
+    return;
+  };
 
-    console.log(backend_host);
-    console.log(this.state);
-    axios
-      .post(`${backend_host}/login`, this.state, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        console.log(response);
-        const token = response.data.token;
-        console.log(token);
+  // Sends a POST request to the server to login a user.
+  handleLogin = async (event) => {
+    event.preventDefault();
+    try {
+      const curr_state = this.state;
+      const login_successful = await login(backend_host, curr_state);
+      const token = login_successful;
+      console.log(token);
+      if (login_successful) {
+        console.log("LOGIN: You have successfully logged in.");
         localStorage.setItem("token", token);
-        console.log("Frontend: Successfully stored token in local storage.");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        this.props.history.push("/home");
+        return;
+      }
+
+      console.log("An error has occured");
+      return;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // handleChange;
