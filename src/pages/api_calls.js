@@ -43,3 +43,21 @@ export const login = async (backend_host, state) => {
     return false;
   }
 };
+
+// Logs in a user if the credentials are correct.
+export const register = async (backend_host, state) => {
+  try {
+    const res = await axios.post(`${backend_host}/register`, state, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log("operation was well");
+    console.log(res.data.token);
+    return res.data.token;
+  } catch (error) {
+    console.log("NOT GOOD");
+    console.log(error);
+    return false;
+  }
+};
