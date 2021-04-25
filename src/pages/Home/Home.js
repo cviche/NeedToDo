@@ -99,7 +99,7 @@ class Home extends React.Component {
             You have currently have no tasks. Click the “+” icon above to add a
             task
           </p>
-          <Tasks task_text="Hello" date="1/1/21" time="2:00pm" />
+          <Tasks task_text="Hello World!" date="1/1/21" time="2:00pm" />
         </section>
       </Fragment>
     );
