@@ -88,13 +88,9 @@ const verifyToken = (req, res, next) => {
 
   jwt.verify(token, "secret", (err, user) => {
     console.log(err);
-    console.log("------");
-    console.log(token);
-    console.log(user);
-    console.log("------");
+
     if (err) return res.sendStatus(403);
-    // req.user = user;
-    // next();
+
     console.log(
       "We have successfully authenticated the user. This token is valid"
     );

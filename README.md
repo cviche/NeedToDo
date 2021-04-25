@@ -91,6 +91,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 - Sending a token to a server using axios
   - **https://www.codegrepper.com/code-examples/javascript/send+bearer+token+in+header+axios+react+js**
 
+- Creating a Modal
+  - **https://www.w3schools.com/howto/howto_css_modals.asp**
+
 ## `Backend`
 
 - Creating a JWT Token:

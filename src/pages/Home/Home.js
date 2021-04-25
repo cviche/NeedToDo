@@ -57,7 +57,11 @@ class Home extends React.Component {
   };
 
   addTask = (event) => {
-    console.log("hello");
+    try {
+      console.log("hello");
+      let modal = document.getElementById("myModal");
+      modal.style.display = "none";
+    } catch {}
   };
 
   render() {
@@ -102,15 +106,18 @@ class Home extends React.Component {
         </header>
         <section className="notes-section">
           <div>
-            {[1] == false ? (
-              <div>Empty array is false</div>
+            {" "}
+            {this.state.notes == false ? (
+              <div style={{ margin: "14px" }}>
+                You have currently have no tasks. Click the “+” icon above to
+                add a task
+              </div>
             ) : (
-              <div>Empty array is true</div>
+              <div style={{ margin: "14px" }}>
+                Click the task to mark it as done.
+              </div>
             )}
-            You have currently have no tasks. Click the “+” icon above to add a
-            task
           </div>
-          <p>Click the task to mark it as done.</p>
           <Tasks task_text="Hello World!" date="1/1/21" time="2:00pm" />
         </section>
       </Fragment>

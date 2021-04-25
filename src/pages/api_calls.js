@@ -64,3 +64,9 @@ export const register = async (backend_host, state) => {
     return false;
   }
 };
+
+//Adds a task for the user
+export const addTask = async (backend_host, state) => {};
+
+//Deletes a task for the user
+export const addTask = async (backend_host, state) => {};
