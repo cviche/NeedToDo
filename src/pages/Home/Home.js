@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import "./Home.scss";
-import { authenticate, addTask, fetchTask } from "../api_calls";
+import { authenticate, addTask, fetchTask, removeTask } from "../api_calls";
 import backend_host from "../host";
 import Tasks from "./Tasks";
 
@@ -18,14 +18,10 @@ class Home extends React.Component {
   componentDidMount = async () => {
     document.body.style.background = "#DAECFC";
     const auth_successful = await authenticate(backend_host);
-    console.log("The user we have found is:", auth_successful);
     if (auth_successful === false) {
-      console.log("We are pushing the user to the home page");
       this.props.history.push("/login");
     }
     this.setState({ username: auth_successful });
-    console.log("cdm done");
-    console.log(this.state);
 
     // Now that we know the user is authenticated, we can fetch their tasks
     // from the database
@@ -69,7 +65,9 @@ class Home extends React.Component {
   addTask = async (event) => {
     try {
       const task_message = document.getElementById("task");
-      const task_message_text = task_message.value;
+      const task_message_text_temp = task_message.value;
+      const task_message_text = task_message_text_temp.replace(/[\r\n]+/g, " ");
+      // task_message_text.replace(/\n/g)
       task_message.value = "";
       console.log("We are going to add a task....");
       console.log("We are going to add a task....");
@@ -104,10 +102,22 @@ class Home extends React.Component {
     try {
       console.log(event.target);
       console.log("done");
-      // const deleteTask_successful = await deleteTask(backend_host, {
-      //   username: this.state.username,
-      //   task: task_message_text,
-      // });
+      console.log(event.target.innerText);
+      const deleted_task = event.target.innerText;
+      // let old_list = this.state.notes;
+      // let new_list = old_list.filter((item) => item !== deleted_task);
+      // this.setState({ notes: new_list });
+      console.log("DELETE 1");
+      const removeTask_successful = await removeTask(backend_host, {
+        username: this.state.username,
+        removed_task: deleted_task,
+      });
+      if (removeTask_successful == true) {
+        // const deleted_task = event.target.innerText;
+        let old_list = this.state.notes;
+        let new_list = old_list.filter((item) => item !== deleted_task);
+        this.setState({ notes: new_list });
+      }
 
       // if (deleteTask_successful == true) {
       //   let messages = this.state.notes;
@@ -117,6 +127,8 @@ class Home extends React.Component {
       // }
     } catch (error) {
       console.log(error);
+      console.log("DELETE 1 FAIL");
+
       console.log("There was an error when deleting a task");
     }
   };

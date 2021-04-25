@@ -109,10 +109,8 @@ exports.addTask = async (req, res) => {
 
 exports.fetchTask = async (req, res) => {
   try {
-    console.log("API: Trying to add a task");
-    // Accessing the password given to us
+    // Accessing the username given to us
     const user = req.body.username;
-    console.log(user);
 
     // Getting password from database
     const fetch_task_successful = await queries.fetch_task(user);
@@ -121,6 +119,37 @@ exports.fetchTask = async (req, res) => {
       return res.status(200).json(fetch_task_successful);
     }
   } catch (error) {
+    console.log(error);
+    console.log("There was an error inside of api.js");
+    return res.status(500).send("Fetch not working. An error occurred");
+  }
+};
+
+exports.removeTask = async (req, res) => {
+  try {
+    console.log("API: Trying to add a task");
+    console.log("DELETE 3");
+
+    // Accessing the password given to us
+    const user = req.body.username;
+    const task_to_remove = req.body.removed_task;
+    console.log(user);
+    console.log(task_to_remove);
+
+    // Getting password from database
+    const remove_task_successful = await queries.remove_task(
+      user,
+      task_to_remove
+    );
+    console.log("That was good");
+    if (remove_task_successful > 0) {
+      console.log("DELETE 3 SUCC");
+      return res.status(200).json(remove_task_successful);
+    }
+    console.log("We did not do it well");
+  } catch (error) {
+    console.log("DELETE 3 FAIL");
+
     console.log(error);
     console.log("There was an error inside of api.js");
     return res.status(500).send("Fetch not working. An error occurred");

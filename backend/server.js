@@ -33,11 +33,14 @@ app.get("/authenticate", api.authenticate);
 // Register route
 app.post("/register", api.register);
 
-// Register route
+// Add task route
 app.post("/addTask", api.addTask);
 
-// Register route
+// Fetch task route
 app.post("/fetchTask", api.fetchTask);
+
+// Remove task route
+app.post("/removeTask", api.removeTask);
 
 // Server listenting to address
 app.listen(port, () => {

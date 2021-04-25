@@ -73,10 +73,21 @@ exports.fetch_task = async (username) => {
   try {
     // Fetches the user's tasks
     console.log("QUERIES: In fetch task");
-    const insert_task = `SELECT message FROM usernotes WHERE username='${username}'`;
-    const task_inserted = await pool.query(insert_task);
-    console.log(task_inserted);
-    return task_inserted;
+    const fetch_task = `SELECT message FROM usernotes WHERE username='${username}'`;
+    const task_fetched = await pool.query(fetch_task);
+    return task_fetched;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+exports.remove_task = async (username, task) => {
+  try {
+    // Fetches the user's tasks
+    const delete_task = `DELETE FROM usernotes WHERE username='${username}' AND message='${task}'`;
+    const task_deleted = await pool.query(delete_task);
+    return task_deleted.rowCount;
   } catch (error) {
     console.log(error);
     return false;

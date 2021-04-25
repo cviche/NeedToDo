@@ -89,7 +89,7 @@ export const addTask = async (backend_host, state) => {
   }
 };
 
-//Adds a task for the user
+//Adds a fetch tasks for the user
 export const fetchTask = async (backend_host, state) => {
   try {
     console.log("API FETCHTASK IN");
@@ -125,6 +125,34 @@ export const fetchTask = async (backend_host, state) => {
     return false;
   } catch (error) {
     console.log("IN API CALLS ERROR");
+    console.log(error);
+    return false;
+  }
+};
+
+//Deletes a task for the user
+export const removeTask = async (backend_host, state) => {
+  try {
+    console.log("API DELETE TASK IN");
+    console.log("DELETE 2");
+    console.log(state);
+    const delete_task_successful = await axios.post(
+      `${backend_host}/removeTask`,
+      state,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (delete_task_successful.status == 200) {
+      // Parsing the data for the frontend to have an easier time processing it
+
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.log("DELETE 2 FAIL");
     console.log(error);
     return false;
   }
