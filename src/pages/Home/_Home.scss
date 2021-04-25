@@ -47,6 +47,8 @@
 
 .notes-section {
   text-align: center;
+  // margin
+  // pa
 }
 
 // ////////////////////////////
@@ -162,4 +164,11 @@
 .loading-icon {
   display: flex;
   justify-content: center;
+}
+
+.notes-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

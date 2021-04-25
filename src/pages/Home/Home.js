@@ -100,20 +100,39 @@ class Home extends React.Component {
     }
   };
 
+  removeTask = async (event) => {
+    try {
+      console.log(event.target);
+      console.log("done");
+      // const deleteTask_successful = await deleteTask(backend_host, {
+      //   username: this.state.username,
+      //   task: task_message_text,
+      // });
+
+      // if (deleteTask_successful == true) {
+      //   let messages = this.state.notes;
+      //   console.log(messages);
+      //   messages.push(task_message_text);
+      //   this.setState({ notes: messages });
+      // }
+    } catch (error) {
+      console.log(error);
+      console.log("There was an error when deleting a task");
+    }
+  };
+
   render() {
     let list_of_tasks = this.state.notes;
     let displayed_tasks = [];
     let i = "";
     for (let i = 0; i < list_of_tasks.length; i++) {
-      console.log("444444444444444");
-      console.log(list_of_tasks[i]);
-      console.log("444444444444444");
       displayed_tasks.push(
         <Tasks
           key={i}
           task_text={list_of_tasks[i]}
           date="1/1/21"
           time="2:00pm"
+          removeTask={this.removeTask}
         />
       );
     }
@@ -159,7 +178,6 @@ class Home extends React.Component {
         </header>
         <section className="notes-section">
           <div>
-            {" "}
             {this.state.notes == false ? (
               <div style={{ margin: "14px" }}>
                 You have currently have no tasks. Click the “+” icon above to
@@ -171,11 +189,11 @@ class Home extends React.Component {
               </div>
             )}
           </div>
-          <div className="">{displayed_tasks}</div>
+          <div className="notes-list">{displayed_tasks}</div>
         </section>
         <div className="loading-icon">
           {this.state.loading ? (
-            <div class="lds-ring">
+            <div className="lds-ring">
               <div></div>
               <div></div>
               <div></div>
