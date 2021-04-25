@@ -10,6 +10,7 @@ class Home extends React.Component {
     this.state = {
       notes: [],
       username: "",
+      loading: true,
     };
   }
 
@@ -32,8 +33,8 @@ class Home extends React.Component {
       username: auth_successful,
     });
     console.log(fetched_tasks);
-    this.setState({ notes: fetched_tasks });
-
+    this.setState({ notes: fetched_tasks, loading: false });
+    // this.setState({ notes: fetched_tasks });
     return;
   };
 
@@ -69,6 +70,7 @@ class Home extends React.Component {
     try {
       const task_message = document.getElementById("task");
       const task_message_text = task_message.value;
+      task_message.value = "";
       console.log("We are going to add a task....");
       console.log("We are going to add a task....");
 
@@ -171,6 +173,15 @@ class Home extends React.Component {
           </div>
           <div className="">{displayed_tasks}</div>
         </section>
+        <div className="loading-icon">
+          {this.state.loading ? (
+            <div class="lds-ring">
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          ) : null}
+        </div>
       </Fragment>
     );
   }
