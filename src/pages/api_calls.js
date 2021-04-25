@@ -21,7 +21,10 @@ export const authenticate = async (backend_host) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    if (auth_successful.status == 200) return true;
+    console.log("What happened");
+    console.log(auth_successful.data.user);
+    console.log("We are in api calls");
+    if (auth_successful.status == 200) return auth_successful.data.user;
     return false;
   } catch (error) {
     console.log(error);

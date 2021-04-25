@@ -1,7 +1,8 @@
 import React from "react";
 import "./Tasks.scss";
 
-function Tasks({ task_text, date }) {
+function Tasks() {
+  // const
   return (
     <div className="task-container">
       <div className="task-info-container">

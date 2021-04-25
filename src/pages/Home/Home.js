@@ -9,6 +9,7 @@ class Home extends React.Component {
     super(props);
     this.state = {
       notes: [{ task: "Need to go swimming", date: "4/27/21", time: "8:50pm" }],
+      username: "",
     };
   }
 
@@ -16,10 +17,14 @@ class Home extends React.Component {
   componentDidMount = async () => {
     document.body.style.background = "#DAECFC";
     const auth_successful = await authenticate(backend_host);
+    console.log("The user we have found is:", auth_successful);
     if (auth_successful === false) {
       console.log("We are pushing the user to the home page");
       this.props.history.push("/login");
     }
+    this.setState({ username: auth_successful });
+    console.log("cdm done");
+    console.log(this.state);
     return;
   };
 
@@ -51,12 +56,16 @@ class Home extends React.Component {
       modal.style.display = "none";
   };
 
+  addTask = (event) => {
+    console.log("hello");
+  };
+
   render() {
     return (
       <Fragment>
-        <div id="myModal" class="modal" onClick={this.removeModal}>
-          <div class="modal-content">
-            <span class="close" onClick={this.removeModal}>
+        <div id="myModal" className="modal" onClick={this.removeModal}>
+          <div className="modal-content">
+            <span className="close" onClick={this.removeModal}>
               &times;
             </span>
             {/* <input type="text" placeholder="Enter a task" /> */}
@@ -67,7 +76,9 @@ class Home extends React.Component {
               rows="10"
               placeholder="Enter a new task"
             ></textarea>
-            <button className="add-task-button">Add task</button>
+            <button className="add-task-button" onClick={this.addTask}>
+              Add task
+            </button>
           </div>
         </div>
         <header>
@@ -90,7 +101,7 @@ class Home extends React.Component {
           </nav>
         </header>
         <section className="notes-section">
-          <p>
+          <div>
             {[1] == false ? (
               <div>Empty array is false</div>
             ) : (
@@ -98,7 +109,8 @@ class Home extends React.Component {
             )}
             You have currently have no tasks. Click the “+” icon above to add a
             task
-          </p>
+          </div>
+          <p>Click the task to mark it as done.</p>
           <Tasks task_text="Hello World!" date="1/1/21" time="2:00pm" />
         </section>
       </Fragment>
