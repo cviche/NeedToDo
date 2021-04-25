@@ -34,12 +34,30 @@ class Home extends React.Component {
     }
   };
 
+  showModal = () => {
+    console.log("You have clicked the add button!");
+    let modal = document.getElementById("myModal");
+    console.log(modal);
+    modal.style.display = "flex";
+  };
+
+  removeModal = (event) => {
+    console.log("You have clicked the modal!");
+    let modal = document.getElementById("myModal");
+    let close_icon = document.getElementsByClassName("close")[0];
+    console.log(modal);
+    if (event.target == modal || event.target == close_icon)
+      modal.style.display = "none";
+  };
+
   render() {
     return (
       <Fragment>
-        <div id="myModal" class="modal">
+        <div id="myModal" class="modal" onClick={this.removeModal}>
           <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="close" onClick={this.removeModal}>
+              &times;
+            </span>
             {/* <input type="text" placeholder="Enter a task" /> */}
             <textarea
               name="new_task"
@@ -56,7 +74,9 @@ class Home extends React.Component {
             <div></div>
             <ul className="home-ul">
               <li className=""></li>
-              <li className="add-icon">+</li>
+              <li className="add-icon" onClick={this.showModal}>
+                +
+              </li>
               <li className="sign-out-button">
                 <button
                   className="sign-out-button"
