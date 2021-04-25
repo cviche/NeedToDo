@@ -14,6 +14,7 @@ class Login extends React.Component {
     this.state = {
       username: "",
       password: "",
+      incorrect_pw: false,
     };
   }
 
@@ -41,11 +42,12 @@ class Login extends React.Component {
         this.props.history.push("/home");
         return;
       }
-
+      this.setState({ incorrect_pw: true });
       console.log("An error has occured");
       return;
     } catch (error) {
       console.log(error);
+      this.setState({ incorrect_pw: true });
     }
   };
 
@@ -63,6 +65,17 @@ class Login extends React.Component {
             NeedToDo
           </Link>
           <form className="form-container" onSubmit={this.handleLogin}>
+            {this.state.incorrect_pw ? (
+              <h4
+                style={{
+                  color: "red",
+                  margin: "10px",
+                  fontWeight: "bolder",
+                }}
+              >
+                Incorrect username/password. Please try again.
+              </h4>
+            ) : null}
             <input
               type="text"
               name="username"
