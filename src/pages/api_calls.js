@@ -68,13 +68,21 @@ export const register = async (backend_host, state) => {
 //Adds a task for the user
 export const addTask = async (backend_host, state) => {
   try {
-    const res = await axios.post(`${backend_host}/addTask`, state, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    console.log(res.data.token);
-    return res.data.token;
+    console.log("API CALLS IN");
+    const add_task_successful = await axios.post(
+      `${backend_host}/addTask`,
+      state,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (add_task_successful.status == 200) {
+      console.log("WE ARE RETUNING TRUE");
+      return true;
+    }
+    return false;
   } catch (error) {
     console.log(error);
     return false;

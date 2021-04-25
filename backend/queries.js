@@ -53,3 +53,17 @@ exports.db_pw = async (username, password) => {
     return null;
   }
 };
+
+exports.add_task = async (username, task) => {
+  try {
+    // Inserting the task associated with the user
+    console.log("QUERIES: In add task");
+    const insert_task = `INSERT INTO usernotes VALUES('${username}', '${task}')`;
+    const task_inserted = await pool.query(insert_task);
+    console.log(task_inserted);
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};

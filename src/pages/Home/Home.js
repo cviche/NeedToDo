@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import "./Home.scss";
-import { authenticate } from "../api_calls";
+import { authenticate, addTask } from "../api_calls";
 import backend_host from "../host";
 import Tasks from "./Tasks";
 
@@ -8,7 +8,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      notes: [{ task: "Need to go swimming", date: "4/27/21", time: "8:50pm" }],
+      notes: ["This is an example task!", "This is another example task"],
       username: "",
     };
   }
@@ -56,15 +56,53 @@ class Home extends React.Component {
       modal.style.display = "none";
   };
 
-  addTask = (event) => {
+  addTask = async (event) => {
     try {
-      console.log("hello");
+      const task_message = document.getElementById("task");
+      const task_message_text = task_message.value;
+      console.log("We are going to add a task");
       let modal = document.getElementById("myModal");
       modal.style.display = "none";
-    } catch {}
+      const addTask_successful = await addTask(backend_host, {
+        username: this.state.username,
+        task: task_message_text,
+      });
+      console.log(task_message_text);
+      console.log("((((((((");
+      console.log(addTask_successful);
+      console.log("((((((((");
+      if (addTask_successful == true) {
+        let messages = this.state.notes;
+        console.log(messages);
+        messages.push(task_message_text);
+        this.setState({ notes: messages });
+      }
+      setTimeout(1000);
+      console.log(this.state);
+    } catch (error) {
+      console.log(error);
+      console.log("There was an error when adding a task");
+    }
   };
 
   render() {
+    let list_of_tasks = this.state.notes;
+    let displayed_tasks = [];
+    let i = "";
+    for (let i = 0; i < list_of_tasks.length; i++) {
+      console.log("444444444444444");
+      console.log(list_of_tasks[i]);
+      console.log("444444444444444");
+      displayed_tasks.push(
+        <Tasks
+          key={i}
+          task_text={list_of_tasks[i]}
+          date="1/1/21"
+          time="2:00pm"
+        />
+      );
+    }
+
     return (
       <Fragment>
         <div id="myModal" className="modal" onClick={this.removeModal}>
@@ -118,7 +156,7 @@ class Home extends React.Component {
               </div>
             )}
           </div>
-          <Tasks task_text="Hello World!" date="1/1/21" time="2:00pm" />
+          <div className="">{displayed_tasks}</div>
         </section>
       </Fragment>
     );

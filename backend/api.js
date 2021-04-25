@@ -82,7 +82,27 @@ exports.authenticate = (req, res) => {
   return data;
 };
 
-exports.addTask = (req, res) => {};
+exports.addTask = async (req, res) => {
+  try {
+    console.log("API: Trying to add a task");
+    // Accessing the password given to us
+    const task = req.body.task;
+    const user = req.body.username;
+    console.log(task, user);
+
+    // Getting password from database
+    const add_task_successful = await queries.add_task(user, task);
+    if (add_task_successful == true) {
+      return res
+        .status(200)
+        .send("Task inserted into the database successfully");
+    }
+  } catch (error) {
+    console.log(error);
+    console.log("There was an error inside of api.js");
+    return res.status(500).send("Task not inserted. An error occurred");
+  }
+};
 const verifyToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
