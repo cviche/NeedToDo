@@ -2,12 +2,13 @@ import React, { Fragment } from "react";
 import "./Home.scss";
 import { authenticate } from "../api_calls";
 import backend_host from "../host";
+import Tasks from "./Tasks";
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      notes: [{}],
+      notes: [{ task: "Need to go swimming", date: "4/27/21", time: "8:50pm" }],
     };
   }
 
@@ -98,6 +99,7 @@ class Home extends React.Component {
             You have currently have no tasks. Click the “+” icon above to add a
             task
           </p>
+          <Tasks task_text="Hello" date="1/1/21" time="2:00pm" />
         </section>
       </Fragment>
     );
