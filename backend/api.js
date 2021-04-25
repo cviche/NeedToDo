@@ -92,17 +92,41 @@ exports.addTask = async (req, res) => {
 
     // Getting password from database
     const add_task_successful = await queries.add_task(user, task);
-    if (add_task_successful == true) {
+    if (add_task_successful > 0) {
       return res
         .status(200)
         .send("Task inserted into the database successfully");
     }
+    return res
+      .status(500)
+      .send("Task not inserted into the database. An error occured");
   } catch (error) {
     console.log(error);
     console.log("There was an error inside of api.js");
     return res.status(500).send("Task not inserted. An error occurred");
   }
 };
+
+exports.fetchTask = async (req, res) => {
+  try {
+    console.log("API: Trying to add a task");
+    // Accessing the password given to us
+    const user = req.body.username;
+    console.log(user);
+
+    // Getting password from database
+    const fetch_task_successful = await queries.fetch_task(user);
+    if (fetch_task_successful == [] || fetch_task_successful != false) {
+      console.log("All good");
+      return res.status(200).json(fetch_task_successful);
+    }
+  } catch (error) {
+    console.log(error);
+    console.log("There was an error inside of api.js");
+    return res.status(500).send("Fetch not working. An error occurred");
+  }
+};
+
 const verifyToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];

@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import "./Home.scss";
-import { authenticate, addTask } from "../api_calls";
+import { authenticate, addTask, fetchTask } from "../api_calls";
 import backend_host from "../host";
 import Tasks from "./Tasks";
 
@@ -8,7 +8,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      notes: ["This is an example task!", "This is another example task"],
+      notes: [],
       username: "",
     };
   }
@@ -25,6 +25,15 @@ class Home extends React.Component {
     this.setState({ username: auth_successful });
     console.log("cdm done");
     console.log(this.state);
+
+    // Now that we know the user is authenticated, we can fetch their tasks
+    // from the database
+    const fetched_tasks = await fetchTask(backend_host, {
+      username: auth_successful,
+    });
+    console.log(fetched_tasks);
+    this.setState({ notes: fetched_tasks });
+
     return;
   };
 
@@ -60,13 +69,17 @@ class Home extends React.Component {
     try {
       const task_message = document.getElementById("task");
       const task_message_text = task_message.value;
-      console.log("We are going to add a task");
+      console.log("We are going to add a task....");
+      console.log("We are going to add a task....");
+
       let modal = document.getElementById("myModal");
       modal.style.display = "none";
       const addTask_successful = await addTask(backend_host, {
         username: this.state.username,
         task: task_message_text,
       });
+      console.log("We are going to add a task....after");
+
       console.log(task_message_text);
       console.log("((((((((");
       console.log(addTask_successful);
@@ -77,7 +90,7 @@ class Home extends React.Component {
         messages.push(task_message_text);
         this.setState({ notes: messages });
       }
-      setTimeout(1000);
+      // setTimeout(1000);
       console.log(this.state);
     } catch (error) {
       console.log(error);

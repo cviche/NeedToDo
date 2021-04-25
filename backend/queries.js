@@ -61,7 +61,22 @@ exports.add_task = async (username, task) => {
     const insert_task = `INSERT INTO usernotes VALUES('${username}', '${task}')`;
     const task_inserted = await pool.query(insert_task);
     console.log(task_inserted);
-    return true;
+    console.log(task_inserted.rows);
+    return task_inserted.rowCount;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+exports.fetch_task = async (username) => {
+  try {
+    // Fetches the user's tasks
+    console.log("QUERIES: In fetch task");
+    const insert_task = `SELECT message FROM usernotes WHERE username='${username}'`;
+    const task_inserted = await pool.query(insert_task);
+    console.log(task_inserted);
+    return task_inserted;
   } catch (error) {
     console.log(error);
     return false;

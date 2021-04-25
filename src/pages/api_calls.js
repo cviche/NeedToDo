@@ -88,3 +88,44 @@ export const addTask = async (backend_host, state) => {
     return false;
   }
 };
+
+//Adds a task for the user
+export const fetchTask = async (backend_host, state) => {
+  try {
+    console.log("API FETCHTASK IN");
+    console.log(state);
+    const fetch_task_successful = await axios.post(
+      `${backend_host}/fetchTask`,
+      state,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (fetch_task_successful.status == 200) {
+      // Parsing the data for the frontend to have an easier time processing it
+      let list_of_messages = fetch_task_successful.data.rows;
+      let sent_messages = [];
+      console.log("34234234234234");
+      for (let i = 0; i < list_of_messages.length; i++) {
+        console.log(list_of_messages[i]["message"]);
+        sent_messages.push(list_of_messages[i]["message"]);
+
+        // console.log(list_of_messages[i]);
+      }
+      console.log("34234234234234");
+
+      console.log("We have successfully fetched the user's tasks");
+      console.log(fetch_task_successful.data);
+      console.log(fetch_task_successful.data.rows);
+
+      return sent_messages;
+    }
+    return false;
+  } catch (error) {
+    console.log("IN API CALLS ERROR");
+    console.log(error);
+    return false;
+  }
+};
