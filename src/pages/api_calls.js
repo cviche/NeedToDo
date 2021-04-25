@@ -66,7 +66,17 @@ export const register = async (backend_host, state) => {
 };
 
 //Adds a task for the user
-export const addTask = async (backend_host, state) => {};
-
-//Deletes a task for the user
-export const addTask = async (backend_host, state) => {};
+export const addTask = async (backend_host, state) => {
+  try {
+    const res = await axios.post(`${backend_host}/addTask`, state, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(res.data.token);
+    return res.data.token;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};

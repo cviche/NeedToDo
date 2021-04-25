@@ -33,6 +33,9 @@ app.get("/authenticate", api.authenticate);
 // Register route
 app.post("/register", api.register);
 
+// Register route
+app.post("/addTask", api.addTask);
+
 // Server listenting to address
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}\n`);

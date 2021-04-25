@@ -81,6 +81,8 @@ exports.authenticate = (req, res) => {
   console.log(data);
   return data;
 };
+
+exports.addTask = (req, res) => {};
 const verifyToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
