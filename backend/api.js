@@ -81,6 +81,81 @@ exports.authenticate = (req, res) => {
   console.log(data);
   return data;
 };
+
+exports.addTask = async (req, res) => {
+  try {
+    console.log("API: Trying to add a task");
+    // Accessing the password given to us
+    const task = req.body.task;
+    const user = req.body.username;
+    console.log(task, user);
+
+    // Getting password from database
+    const add_task_successful = await queries.add_task(user, task);
+    if (add_task_successful > 0) {
+      return res
+        .status(200)
+        .send("Task inserted into the database successfully");
+    }
+    return res
+      .status(500)
+      .send("Task not inserted into the database. An error occured");
+  } catch (error) {
+    console.log(error);
+    console.log("There was an error inside of api.js");
+    return res.status(500).send("Task not inserted. An error occurred");
+  }
+};
+
+exports.fetchTask = async (req, res) => {
+  try {
+    // Accessing the username given to us
+    const user = req.body.username;
+
+    // Getting password from database
+    const fetch_task_successful = await queries.fetch_task(user);
+    if (fetch_task_successful == [] || fetch_task_successful != false) {
+      console.log("All good");
+      return res.status(200).json(fetch_task_successful);
+    }
+  } catch (error) {
+    console.log(error);
+    console.log("There was an error inside of api.js");
+    return res.status(500).send("Fetch not working. An error occurred");
+  }
+};
+
+exports.removeTask = async (req, res) => {
+  try {
+    console.log("API: Trying to add a task");
+    console.log("DELETE 3");
+
+    // Accessing the password given to us
+    const user = req.body.username;
+    const task_to_remove = req.body.removed_task;
+    console.log(user);
+    console.log(task_to_remove);
+
+    // Getting password from database
+    const remove_task_successful = await queries.remove_task(
+      user,
+      task_to_remove
+    );
+    console.log("That was good");
+    if (remove_task_successful > 0) {
+      console.log("DELETE 3 SUCC");
+      return res.status(200).json(remove_task_successful);
+    }
+    console.log("We did not do it well");
+  } catch (error) {
+    console.log("DELETE 3 FAIL");
+
+    console.log(error);
+    console.log("There was an error inside of api.js");
+    return res.status(500).send("Fetch not working. An error occurred");
+  }
+};
+
 const verifyToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
@@ -88,13 +163,12 @@ const verifyToken = (req, res, next) => {
 
   jwt.verify(token, "secret", (err, user) => {
     console.log(err);
-    console.log("above is the error");
+
     if (err) return res.sendStatus(403);
-    // req.user = user;
-    // next();
+
     console.log(
       "We have successfully authenticated the user. This token is valid"
     );
-    return res.sendStatus(200);
+    return res.status(200).json(user);
   });
 };

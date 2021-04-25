@@ -3,7 +3,7 @@ import "./Landing.scss";
 import checklist from "../images/checklist.png";
 import { Link } from "react-router-dom";
 import backend_host from "../host";
-import { login, authenticate, register } from "../api_calls";
+import { authenticate, register } from "../api_calls";
 
 class Landing extends React.Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class Landing extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  // Sends a POST request to the server to login a user.
+  // Sends a POST request to the server register a user.
   handleRegister = async (event) => {
     event.preventDefault();
     try {

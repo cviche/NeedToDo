@@ -53,3 +53,43 @@ exports.db_pw = async (username, password) => {
     return null;
   }
 };
+
+exports.add_task = async (username, task) => {
+  try {
+    // Inserting the task associated with the user
+    console.log("QUERIES: In add task");
+    const insert_task = `INSERT INTO usernotes VALUES('${username}', '${task}')`;
+    const task_inserted = await pool.query(insert_task);
+    console.log(task_inserted);
+    console.log(task_inserted.rows);
+    return task_inserted.rowCount;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+exports.fetch_task = async (username) => {
+  try {
+    // Fetches the user's tasks
+    console.log("QUERIES: In fetch task");
+    const fetch_task = `SELECT message FROM usernotes WHERE username='${username}'`;
+    const task_fetched = await pool.query(fetch_task);
+    return task_fetched;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+exports.remove_task = async (username, task) => {
+  try {
+    // Fetches the user's tasks
+    const delete_task = `DELETE FROM usernotes WHERE username='${username}' AND message='${task}'`;
+    const task_deleted = await pool.query(delete_task);
+    return task_deleted.rowCount;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
