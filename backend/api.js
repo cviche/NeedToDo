@@ -54,7 +54,7 @@ exports.login = async (req, res) => {
     //Comparing the hashed password to the password in the database
     if (await bcrypt.compare(user_pw, db_pw)) {
       // Give the user a JSON Web token so they stay logged in
-      const token = jwt.sign({ user: user }, process.env.JWT_SECRET); // NOTE: Change secret to environment variable
+      const token = jwt.sign({ user: user }, process.env.JWT_SECRET);
       return res.status(200).json({ token });
     }
 
