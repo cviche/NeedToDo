@@ -17,6 +17,7 @@ class Landing extends React.Component {
 
   // Redirects to home page if the user is authenticated.
   componentDidMount = async () => {
+    document.body.style.background = "#71ff7f";
     const auth_successful = await authenticate(backend_host);
     if (auth_successful === true) {
       this.props.history.push("/home");
