@@ -19,7 +19,7 @@ In the project directory, you can run these command in order:
 ### `npm start` `cd backend` `node server.js`
 
 This runs the frontend and backend.\
-You will also need to setup environment variables for the database that you will use in the backend folder.\
+You will also need to setup environment variables for the database that you will use in the backend folder and pages folder (src/pages).\
 Once that is done, you can use the app should be running!
 
 ## References
@@ -30,9 +30,6 @@ Once that is done, you can use the app should be running!
   - **https://www.elephantsql.com/**
 - Connecting to ElephantSQL:
   - **https://www.elephantsql.com/docs/pgadmin.html**
-- Making Database Connection Private:
-  - **https://www.npmjs.com/package/dotenv**
-  - **https://www.youtube.com/watch?v=HRBNeERE5PU**
 
 ## `Frontend`
 
@@ -59,3 +56,7 @@ Once that is done, you can use the app should be running!
 
 - Importing functions from another file
   - **https://www.youtube.com/watch?v=Jqn_wjkSZwo**
+- Making Backend and Frontend private
+  - **https://www.npmjs.com/package/dotenv**
+  - **https://create-react-app.dev/docs/adding-custom-environment-variables/**
+  - **https://www.youtube.com/watch?v=HRBNeERE5PU**
