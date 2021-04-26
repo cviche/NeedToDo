@@ -1,4 +1,3 @@
-import "./App.css";
 import Landing from "./pages/Landing/Landing";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Login from "./pages/Login/Login";

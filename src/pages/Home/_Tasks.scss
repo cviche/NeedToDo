@@ -1,7 +1,6 @@
 @import "../variables";
 
 .task-container {
-  // text-align: center;
   display: flex;
   flex-direction: column;
   width: 80%;
@@ -13,26 +12,7 @@
   font-weight: bold;
   margin-bottom: 2.5rem;
   white-space: pre-wrap;
-  // height: auto;
-  // background-color: black;
-  // height: 10rem;
 }
-
-// .task-info-container {
-//   display: flex;
-//   justify-content: space-between;
-//   // border: 3px solid red;
-//   border-radius: 10px;
-//   background-color: white;
-//   width: 80%;
-//   // flex-basis: 100%;
-//   // align-self: flex-start;
-//   // flex-grow: 0.2;
-//   // font-size: 1.5rem;
-//   font-size: 24px;
-//   font-weight: bold;
-//   // margin-bottom: 3rem;
-// }
 
 .task-container:hover {
   background-color: whitesmoke;

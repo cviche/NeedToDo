@@ -6,8 +6,6 @@ import backend_host from "../host";
 import { login, authenticate } from "../api_calls";
 
 axios.defaults.withCredentials = true;
-// let history = useHistory();
-// document.body.style.backgroundColor = "green";
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -20,6 +18,7 @@ class Login extends React.Component {
 
   // Redirects to home page if the user is authenticated.
   componentDidMount = async () => {
+    document.body.style.background = "#71ff7f";
     const auth_successful = await authenticate(backend_host);
     if (auth_successful === true) {
       console.log("We are pushing the user to the home page");
@@ -37,13 +36,11 @@ class Login extends React.Component {
       const token = login_successful;
       console.log(token);
       if (login_successful) {
-        console.log("LOGIN: You have successfully logged in.");
         localStorage.setItem("token", token);
         this.props.history.push("/home");
         return;
       }
       this.setState({ incorrect_pw: true });
-      console.log("An error has occured");
       return;
     } catch (error) {
       console.log(error);
@@ -51,9 +48,8 @@ class Login extends React.Component {
     }
   };
 
-  // handleChange;
+  // Updates state
   handleChange = (event) => {
-    console.log(event.target.value);
     this.setState({ [event.target.name]: event.target.value });
   };
 
