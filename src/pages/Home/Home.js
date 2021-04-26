@@ -14,7 +14,7 @@ class Home extends React.Component {
     };
   }
 
-  // Redirects to login page if they are not authenticated.
+  // Redirects to login page if the user is not authenticated.
   componentDidMount = async () => {
     document.body.style.background = "#DAECFC";
     const auth_successful = await authenticate(backend_host);
@@ -66,14 +66,20 @@ class Home extends React.Component {
     try {
       const task_message = document.getElementById("task");
       const task_message_text_temp = task_message.value;
+
       const task_message_text = task_message_text_temp.replace(/[\r\n]+/g, " ");
-      // task_message_text.replace(/\n/g)
       task_message.value = "";
-      console.log("We are going to add a task....");
-      console.log("We are going to add a task....");
 
       let modal = document.getElementById("myModal");
       modal.style.display = "none";
+
+      // Checking for the case where the string the user has entered is only whitespace or empty.
+      if (
+        !task_message_text_temp.replace(/\s/g, "").length ||
+        task_message_text_temp == ""
+      ) {
+        return;
+      }
       const addTask_successful = await addTask(backend_host, {
         username: this.state.username,
         task: task_message_text,
