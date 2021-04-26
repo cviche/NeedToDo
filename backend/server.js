@@ -17,7 +17,6 @@ app.use(
 
 // Lets the server accept JSON
 app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
 
 // Root directory call
 app.get("/", (req, res) => {

@@ -5,36 +5,29 @@ const jwt = require("jsonwebtoken");
 exports.register = async (req, res) => {
   try {
     // Extracting username and password.
-    console.log("in register api");
-    console.log(req.body);
     const user = req.body.username;
     const pw = req.body.password;
-    console.log("hi");
 
     // Generating a hashed password to store into the database for security.
     const salt = await bcrypt.genSalt();
     const hashed_pw = await bcrypt.hash(pw, salt);
 
     // Storing user information into the database.
-    console.log("Before insert succ");
-
     const insert_successful = await queries.register_user(user, hashed_pw);
-    console.log("After insert succ");
 
     // Giving the user a JSON Web Token to make sure they stay logged in
     // once they finish creating their account.
     if (insert_successful) {
       console.log("Successful: The user has been created!");
       return exports.login(req, res);
-      // return res.status(200).send("You have successfully created an account!");
-    } else {
-      console.log("Unsuccessful: The user has not been created!");
-      return res
-        .status(500)
-        .send("An error has occured while trying to register you.");
     }
+
+    // The user was not created. There was an error.
+    console.log("Unsuccessful: The user has not been created!");
+    return res
+      .status(500)
+      .send("An error has occured while trying to register you.");
   } catch {
-    console.log("error");
     return res
       .status(500)
       .send("An error has occured while trying to register you.");
@@ -62,7 +55,6 @@ exports.login = async (req, res) => {
     if (await bcrypt.compare(user_pw, db_pw)) {
       // Give the user a JSON Web token so they stay logged in
       const token = jwt.sign({ user: user }, "secret"); // NOTE: Change secret to environment variable
-      console.log(token);
       return res.status(200).json({ token });
     }
 
@@ -78,17 +70,14 @@ exports.login = async (req, res) => {
 
 exports.authenticate = (req, res) => {
   const data = verifyToken(req, res, null);
-  console.log(data);
   return data;
 };
 
 exports.addTask = async (req, res) => {
   try {
-    console.log("API: Trying to add a task");
     // Accessing the password given to us
     const task = req.body.task;
     const user = req.body.username;
-    console.log(task, user);
 
     // Getting password from database
     const add_task_successful = await queries.add_task(user, task);
@@ -102,7 +91,6 @@ exports.addTask = async (req, res) => {
       .send("Task not inserted into the database. An error occured");
   } catch (error) {
     console.log(error);
-    console.log("There was an error inside of api.js");
     return res.status(500).send("Task not inserted. An error occurred");
   }
 };
@@ -115,43 +103,30 @@ exports.fetchTask = async (req, res) => {
     // Getting password from database
     const fetch_task_successful = await queries.fetch_task(user);
     if (fetch_task_successful == [] || fetch_task_successful != false) {
-      console.log("All good");
       return res.status(200).json(fetch_task_successful);
     }
   } catch (error) {
     console.log(error);
-    console.log("There was an error inside of api.js");
     return res.status(500).send("Fetch not working. An error occurred");
   }
 };
 
 exports.removeTask = async (req, res) => {
   try {
-    console.log("API: Trying to add a task");
-    console.log("DELETE 3");
-
     // Accessing the password given to us
     const user = req.body.username;
     const task_to_remove = req.body.removed_task;
-    console.log(user);
-    console.log(task_to_remove);
 
     // Getting password from database
     const remove_task_successful = await queries.remove_task(
       user,
       task_to_remove
     );
-    console.log("That was good");
     if (remove_task_successful > 0) {
-      console.log("DELETE 3 SUCC");
       return res.status(200).json(remove_task_successful);
     }
-    console.log("We did not do it well");
   } catch (error) {
-    console.log("DELETE 3 FAIL");
-
     console.log(error);
-    console.log("There was an error inside of api.js");
     return res.status(500).send("Fetch not working. An error occurred");
   }
 };
