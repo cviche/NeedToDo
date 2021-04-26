@@ -119,7 +119,6 @@ class Home extends React.Component {
     // Storing a list of the user's task so it can be displayed on their screen.
     let list_of_tasks = this.state.notes;
     let displayed_tasks = [];
-    let i = "";
     for (let i = 0; i < list_of_tasks.length; i++) {
       displayed_tasks.push(
         <Tasks
