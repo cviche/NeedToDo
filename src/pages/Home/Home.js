@@ -1,8 +1,10 @@
 import React, { Fragment } from "react";
 import "./Home.scss";
 import { authenticate, addTask, fetchTask, removeTask } from "../api_calls";
-import backend_host from "../host";
+// import backend_host from "../host";
 import Tasks from "./Tasks";
+require("dotenv").config();
+const backend_host = process.env.REACT_APP_BACKEND_SERVER;
 
 class Home extends React.Component {
   constructor(props) {

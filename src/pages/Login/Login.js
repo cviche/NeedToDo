@@ -2,9 +2,10 @@ import React, { Fragment } from "react";
 import "./Login.scss";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import backend_host from "../host";
+// import backend_host from "../host";
 import { login, authenticate } from "../api_calls";
-
+require("dotenv").config();
+const backend_host = process.env.REACT_APP_BACKEND_SERVER;
 axios.defaults.withCredentials = true;
 class Login extends React.Component {
   constructor(props) {

@@ -50,6 +50,11 @@ export const login = async (backend_host, state) => {
 // Registers a user to the database
 export const register = async (backend_host, state) => {
   try {
+    console.log(backend_host);
+    console.log(backend_host);
+    console.log(backend_host);
+    console.log(backend_host);
+    console.log(backend_host);
     const res = await axios.post(`${backend_host}/register`, state, {
       headers: {
         "Content-Type": "application/json",

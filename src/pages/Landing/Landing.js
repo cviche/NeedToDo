@@ -2,8 +2,9 @@ import React, { Fragment } from "react";
 import "./Landing.scss";
 import checklist from "../images/checklist.png";
 import { Link } from "react-router-dom";
-import backend_host from "../host";
 import { authenticate, register } from "../api_calls";
+require("dotenv").config();
+const backend_host = process.env.REACT_APP_BACKEND_SERVER;
 
 class Landing extends React.Component {
   constructor(props) {
@@ -18,6 +19,10 @@ class Landing extends React.Component {
   // Redirects to home page if the user is authenticated.
   componentDidMount = async () => {
     document.body.style.background = "#71ff7f";
+    console.log(backend_host);
+    console.log(backend_host);
+    console.log(backend_host);
+    console.log(backend_host);
     const auth_successful = await authenticate(backend_host);
     if (auth_successful === true) {
       this.props.history.push("/home");
