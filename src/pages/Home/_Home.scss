@@ -7,7 +7,6 @@
   display: flex;
   justify-content: space-between;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  //   @include show_border(red, true);
 }
 
 .home-ul {
@@ -17,11 +16,7 @@
   height: 4rem;
   justify-content: space-around;
   align-items: center;
-  //   margin: 0.2rem;
   width: 20rem;
-  //   flex-flow: ;
-  //
-  //   background-color: black;
   @include show_border(red, false);
 }
 
@@ -47,14 +42,11 @@
 
 .notes-section {
   text-align: center;
-  // margin
-  // pa
 }
 
-// ////////////////////////////
 /* The Modal (background) */
 .modal {
-  display: none; /* Hidden by default CHANGE BACK TO NONE*/
+  display: none; 
   align-items: center;
   justify-content: center;
   position: fixed; /* Stay in place */
@@ -74,10 +66,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
-  // justify-content: ;
   background-color: $primary-color;
-  // margin: 15% auto; /* 15% from the top and centered */
-  // padding: 20px;
   border: 1px solid #888;
   border-radius: 13px;
   width: 25rem; /* Could be more or less, depending on screen size */
@@ -118,7 +107,6 @@
   width: 5rem;
   height: 2rem;
   font-weight: bold;
-  // object-fit: contain;
 }
 
 .add-task-button:hover {

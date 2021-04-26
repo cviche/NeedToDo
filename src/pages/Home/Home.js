@@ -14,62 +14,58 @@ class Home extends React.Component {
     };
   }
 
-  // Redirects to login page if the user is not authenticated.
   componentDidMount = async () => {
     document.body.style.background = "#DAECFC";
+
+    // Redirects to login page if the user is not authenticated.
     const auth_successful = await authenticate(backend_host);
     if (auth_successful === false) {
       this.props.history.push("/login");
     }
     this.setState({ username: auth_successful });
 
-    // Now that we know the user is authenticated, we can fetch their tasks
-    // from the database
+    // Now that we know the user is authenticated, we can fetch their tasks from the database
     const fetched_tasks = await fetchTask(backend_host, {
       username: auth_successful,
     });
-    console.log(fetched_tasks);
     this.setState({ notes: fetched_tasks, loading: false });
-    // this.setState({ notes: fetched_tasks });
     return;
   };
 
+  // Removing the JWT when signing out a user
   handleSignOut = (event) => {
     try {
       localStorage.removeItem("token");
       this.props.history.push("/login");
     } catch (error) {
       console.log(error);
-      console.log(
-        "There was an error when trying to sign out. Please try again"
-      );
     }
   };
 
+  // When a user clicks the plus icon, the modal will appear.
   showModal = () => {
-    console.log("You have clicked the add button!");
     let modal = document.getElementById("myModal");
-    console.log(modal);
     modal.style.display = "flex";
   };
 
+  // When a user clicks the 'X' icon or the 'add task' button, the modal will disappear.
   removeModal = (event) => {
-    console.log("You have clicked the modal!");
     let modal = document.getElementById("myModal");
     let close_icon = document.getElementsByClassName("close")[0];
-    console.log(modal);
     if (event.target == modal || event.target == close_icon)
       modal.style.display = "none";
   };
 
+  // Will add a task inside the database and display the newly added task to the user
   addTask = async (event) => {
     try {
+      // Getting the task text from the HTML element
       const task_message = document.getElementById("task");
       const task_message_text_temp = task_message.value;
-
       const task_message_text = task_message_text_temp.replace(/[\r\n]+/g, " ");
       task_message.value = "";
 
+      // Closing the Modal
       let modal = document.getElementById("myModal");
       modal.style.display = "none";
 
@@ -80,66 +76,47 @@ class Home extends React.Component {
       ) {
         return;
       }
+
+      // Using an API I made to add the task to the database and send back a confirmation that it was inserted.
       const addTask_successful = await addTask(backend_host, {
         username: this.state.username,
         task: task_message_text,
       });
-      console.log("We are going to add a task....after");
 
-      console.log(task_message_text);
-      console.log("((((((((");
-      console.log(addTask_successful);
-      console.log("((((((((");
+      // If we have successfully inserted a task inside the database, add the task to the user's screen.
       if (addTask_successful == true) {
         let messages = this.state.notes;
-        console.log(messages);
         messages.push(task_message_text);
         this.setState({ notes: messages });
       }
-      // setTimeout(1000);
-      console.log(this.state);
     } catch (error) {
       console.log(error);
-      console.log("There was an error when adding a task");
     }
   };
 
+  // Removes a user's task from the database and updates it on the screen
   removeTask = async (event) => {
     try {
-      console.log(event.target);
-      console.log("done");
-      console.log(event.target.innerText);
+      //Deleting the task from the database
       const deleted_task = event.target.innerText;
-      // let old_list = this.state.notes;
-      // let new_list = old_list.filter((item) => item !== deleted_task);
-      // this.setState({ notes: new_list });
-      console.log("DELETE 1");
       const removeTask_successful = await removeTask(backend_host, {
         username: this.state.username,
         removed_task: deleted_task,
       });
+
+      // Deleting the task from the user's screen
       if (removeTask_successful == true) {
-        // const deleted_task = event.target.innerText;
         let old_list = this.state.notes;
         let new_list = old_list.filter((item) => item !== deleted_task);
         this.setState({ notes: new_list });
       }
-
-      // if (deleteTask_successful == true) {
-      //   let messages = this.state.notes;
-      //   console.log(messages);
-      //   messages.push(task_message_text);
-      //   this.setState({ notes: messages });
-      // }
     } catch (error) {
       console.log(error);
-      console.log("DELETE 1 FAIL");
-
-      console.log("There was an error when deleting a task");
     }
   };
 
   render() {
+    // Storing a list of the user's task so it can be displayed on their screen.
     let list_of_tasks = this.state.notes;
     let displayed_tasks = [];
     let i = "";
@@ -162,7 +139,6 @@ class Home extends React.Component {
             <span className="close" onClick={this.removeModal}>
               &times;
             </span>
-            {/* <input type="text" placeholder="Enter a task" /> */}
             <textarea
               name="new_task"
               id="task"

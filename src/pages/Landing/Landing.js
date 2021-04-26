@@ -18,17 +18,14 @@ class Landing extends React.Component {
   // Redirects to home page if the user is authenticated.
   componentDidMount = async () => {
     const auth_successful = await authenticate(backend_host);
-    console.log(this.state.taken_username, "Is this");
     if (auth_successful === true) {
-      console.log("We are pushing the user to the home page");
       this.props.history.push("/home");
     }
     return;
   };
 
-  // handleChange;
+  // Changes state and input value
   handleChange = (event) => {
-    console.log(event.target.value);
     this.setState({ [event.target.name]: event.target.value });
   };
 
@@ -37,41 +34,19 @@ class Landing extends React.Component {
     event.preventDefault();
     try {
       const curr_state = this.state;
-      console.log(curr_state);
       const register_successful = await register(backend_host, curr_state);
       const token = register_successful;
-      console.log(token);
       if (register_successful) {
-        console.log("LOGIN: You have successfully registered/logged in.");
         localStorage.setItem("token", token);
         this.props.history.push("/home");
         return;
       }
       this.setState({ taken_username: true });
-      console.log("An error has occured");
       return;
     } catch (error) {
       console.log(error);
       this.setState({ taken_username: true });
-      console.log(this.state.taken_username);
     }
-    // try {
-    //   const curr_state = this.state;
-    //   const login_successful = await login(backend_host, curr_state);
-    //   const token = login_successful;
-    //   console.log(token);
-    //   if (login_successful) {
-    //     console.log("LOGIN: You have successfully logged in.");
-    //     localStorage.setItem("token", token);
-    //     this.props.history.push("/home");
-    //     return;
-    //   }
-
-    //   console.log("An error has occured");
-    //   return;
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
   render() {

@@ -13,33 +13,22 @@ body {
 }
 
 .header {
-  @include show_border(red);
   width: 100%;
   height: auto;
-}
-.nav {
-  @include show_border(green);
 }
 
 .ul {
   height: 5rem;
   list-style-type: none;
-  @include show_border(blue);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  // align-items: center;
   font-size: 3rem;
-}
-
-.li {
-  @include show_border(white);
 }
 
 button {
   background-color: transparent;
   border: none;
-
   outline: none;
 }
 
@@ -49,7 +38,6 @@ button {
   font-family: "Yu Gothic";
   color: $secondary-color;
   font-weight: bold;
-  // margin-top: 0.5rem;
 }
 
 .sign-in {
@@ -65,7 +53,6 @@ button {
 }
 
 .main-body {
-  @include show_border(grey);
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -76,11 +63,9 @@ button {
 .checklist-img {
   width: 10rem;
   height: 15rem;
-  @include show_border(orange);
 }
 
 .sign-in-section {
-  @include show_border(purple);
   width: 25rem;
   height: 25rem;
   display: flex;
@@ -90,7 +75,6 @@ button {
 
 .sign-in-info {
   height: 15rem;
-  // @include show_border(purple, true);
   display: flex;
   flex: 1 0 auto;
   flex-direction: column;
