@@ -19,10 +19,6 @@ class Landing extends React.Component {
   // Redirects to home page if the user is authenticated.
   componentDidMount = async () => {
     document.body.style.background = "#71ff7f";
-    console.log(backend_host);
-    console.log(backend_host);
-    console.log(backend_host);
-    console.log(backend_host);
     const auth_successful = await authenticate(backend_host);
     if (auth_successful === true) {
       this.props.history.push("/home");
@@ -62,7 +58,10 @@ class Landing extends React.Component {
           <nav className="nav">
             <ul className="ul">
               <li className="li">
-                <button className="logo-text">NeedToDo</button>
+                {/* <button className="logo-text">NeedToDo</button> */}
+                <Link to="/" className="logo-text">
+                  NeedToDo
+                </Link>
               </li>
               <li className="li">
                 <Link to="/login" className="sign-in">
