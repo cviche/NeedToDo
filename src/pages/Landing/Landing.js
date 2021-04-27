@@ -20,7 +20,7 @@ class Landing extends React.Component {
   componentDidMount = async () => {
     document.body.style.background = "#71ff7f";
     const auth_successful = await authenticate(backend_host);
-    if (auth_successful === true) {
+    if (auth_successful == true) {
       this.props.history.push("/home");
     }
     return;
