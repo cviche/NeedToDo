@@ -9,7 +9,7 @@ export const authenticate = async (backend_host) => {
     console.log(token);
     if (token === null) {
       console.log("A token does not exist");
-      return false;
+      return "";
     }
 
     // Making sure the JWT is valid.
@@ -24,9 +24,9 @@ export const authenticate = async (backend_host) => {
     if (auth_successful.status == 200) return auth_successful.data.user;
 
     // Let the user know the JWT is invalid.
-    return false;
+    return "";
   } catch (error) {
-    return false;
+    return "";
   }
 };
 

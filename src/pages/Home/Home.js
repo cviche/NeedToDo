@@ -21,7 +21,7 @@ class Home extends React.Component {
 
     // Redirects to login page if the user is not authenticated.
     const auth_successful = await authenticate(backend_host);
-    if (auth_successful === false) {
+    if (auth_successful === "") {
       this.props.history.push("/login");
     }
     this.setState({ username: auth_successful });
